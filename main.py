@@ -1,5 +1,6 @@
 from dotenv import dotenv_values, set_key
 from telethon import TelegramClient
+from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 
 
 def get_env_keys():
@@ -24,10 +25,21 @@ def set_env_keys():
         return set_env_keys()
 
 
+def start_client(api_id, api_hash):
+    try:
+        global client
+        client = TelegramClient("./sessions/client", api_id, api_hash)
+        with client:
+            client.loop.run_until_complete(search())
+    except (ApiIdInvalidError, HashInvalidError):
+        print("Данные введены неверно. Повторите попытку.")
+        api_id, api_hash = set_env_keys()
+        start_client(api_id, api_hash)
+
+
 def main():
     api_id, api_hash = get_env_keys()
-    client = TelegramClient("./sessions/client", api_id, api_hash)
-    client.start()
+    start_client(api_id, api_hash)
     print(api_id, api_hash, end="\n")
 
 
