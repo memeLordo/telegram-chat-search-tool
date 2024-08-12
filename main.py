@@ -1,4 +1,5 @@
 from dotenv import dotenv_values, set_key
+from telethon import TelegramClient
 
 
 def get_env_keys():
@@ -25,6 +26,8 @@ def set_env_keys():
 
 def main():
     api_id, api_hash = get_env_keys()
+    client = TelegramClient("./sessions/client", api_id, api_hash)
+    client.start()
     print(api_id, api_hash, end="\n")
 
 
