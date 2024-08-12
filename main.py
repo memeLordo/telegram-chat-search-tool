@@ -4,8 +4,8 @@ from dotenv import dotenv_values, set_key
 def get_env_keys():
     try:
         env_config = dotenv_values(".env.script")
-        api_id = env_config["API_ID"]
-        api_hash = env_config["API_HASH"]
+        api_id = int(env_config["API_ID"] or 0)
+        api_hash = str(env_config["API_HASH"] or None)
         return (api_id, api_hash)
     except KeyError:
         return set_env_keys()
