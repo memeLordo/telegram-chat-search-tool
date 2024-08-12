@@ -1,0 +1,8 @@
+*.session*
+*.log
+*.txt
+*.json
+.env*
+__pycache__
+test*.py
+*.db
