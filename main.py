@@ -25,6 +25,12 @@ def set_env_keys():
         return set_env_keys()
 
 
+async def search():
+    global client
+    me = await client.get_me()
+    print(me)
+
+
 def start_client(api_id, api_hash):
     try:
         global client
