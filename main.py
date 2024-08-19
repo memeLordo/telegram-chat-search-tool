@@ -60,21 +60,17 @@ async def search():
 
 def start_client(api_id, api_hash):
     def run_():
-        global client
         with client:
-            return client.loop.run_until_complete(search())
+            result = client.loop.run_until_complete(search())
+        match input("Сохранить результат в файл (y/N): "):
+            case "y":
+                save_to_txt(result)
 
     try:
         global client
         session_dir = mkdir("./sessions")
         client = TelegramClient(f"{session_dir}/client", api_id, api_hash)
-        result = run_()
-
-        save_file = input("Сохранить результат в файл (y/N): ")
-        match save_file:
-            case "y":
-                save_to_txt(result)
-
+        run_()
         print("<End message>")
     except (ApiIdInvalidError, HashInvalidError):
         print("Данные введены неверно. Повторите попытку.")
