@@ -42,8 +42,9 @@ def set_env_keys():
         return set_env_keys()
 
 
-async def search(request: str):
+async def search():
     global client
+    request = input("Введите ключ поиска: ")
     result = ""
     async for dialog in client.iter_dialogs():
         if dialog.is_group or dialog.is_channel:
@@ -60,9 +61,8 @@ async def search(request: str):
 def start_client(api_id, api_hash):
     def run_():
         global client
-        search_request = input("Введите ключ поиска: ")
         with client:
-            return client.loop.run_until_complete(search(search_request))
+            return client.loop.run_until_complete(search())
 
     try:
         global client
