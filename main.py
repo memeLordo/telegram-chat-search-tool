@@ -14,10 +14,10 @@ def mkdir(dirname: str):
 def save_to_txt(text: str):
     global index
     dir = mkdir("./requests")
-    filename = f"{dir}/request{index}.txt"
+    filename = f"{dir}/request[{index}].txt"
     while os.path.exists(filename):
         index += 1
-        filename = f"{dir}/request{index}.txt"
+        filename = f"{dir}/request[{index}].txt"
     with open(filename, "w+") as file:
         file.write(text)
     index += 1
