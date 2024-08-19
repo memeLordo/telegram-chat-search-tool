@@ -27,6 +27,15 @@ def set_env_keys():
 
 async def search():
     global client
+    async for dialog in client.iter_dialogs():
+        if dialog.is_group or dialog.is_channel:
+            async for user in client.iter_messages(
+                dialog,
+                search="Random Coffee",
+                limit=100,
+            ):
+                print(dialog.name)
+                break
 
 
 def start_client(api_id, api_hash):
