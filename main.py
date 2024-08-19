@@ -78,6 +78,7 @@ async def search():
             time.sleep(1 / len(symbols))
     sys.stdout.write(backtrack)
     print("Complete!" + " " * len(loading), end="\n")
+    print(symbols + "\n" + result + "\n" + symbols, end="\n")
     return result
 
 
