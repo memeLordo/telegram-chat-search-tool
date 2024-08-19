@@ -27,6 +27,7 @@ def set_env_keys():
 
 async def search(request: str):
     global client
+    result = ""
     async for dialog in client.iter_dialogs():
         if dialog.is_group or dialog.is_channel:
             async for user in client.iter_messages(
@@ -34,8 +35,9 @@ async def search(request: str):
                 search=request,
                 limit=100,
             ):  # TODO: rewrite for next const as for loop is unused
-                print(dialog.name)
+                result = result + "\n" + dialog.name
                 break
+    return result
 
 
 def start_client(api_id, api_hash):
@@ -43,12 +45,12 @@ def start_client(api_id, api_hash):
         global client
         search_request = input("Введите ключ поиска: ")
         with client:
-            client.loop.run_until_complete(search(search_request))
+            return client.loop.run_until_complete(search(search_request))
 
     try:
         global client
         client = TelegramClient("./sessions/client", api_id, api_hash)
-        run_()
+        result = run_()
         print("<End message>")
     except (ApiIdInvalidError, HashInvalidError):
         print("Данные введены неверно. Повторите попытку.")
