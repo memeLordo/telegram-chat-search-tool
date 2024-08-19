@@ -3,6 +3,13 @@ from telethon import TelegramClient
 from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 
 
+def save_to_txt(text: str):
+    global index
+    filename = f"./requests/request{index}.txt"
+    filename = f"{dir}/request{index}.txt"
+    with open(filename, "w+") as file:
+        file.write(text)
+    index += 1
 def get_env_keys():
     try:
         env_config = dotenv_values(".env.script")
@@ -51,6 +58,10 @@ def start_client(api_id, api_hash):
         global client
         client = TelegramClient("./sessions/client", api_id, api_hash)
         result = run_()
+        save_file = input("Сохранить результат в файл (y/N): ")
+        match save_file:
+            case "y":
+                save_to_txt(result)
         print("<End message>")
     except (ApiIdInvalidError, HashInvalidError):
         print("Данные введены неверно. Повторите попытку.")
@@ -59,6 +70,8 @@ def start_client(api_id, api_hash):
 
 
 def main():
+    global index
+    index = 1
     api_id, api_hash = get_env_keys()
     start_client(api_id, api_hash)
 
