@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9f8082b49a4d9d491fa56bd25cb2ac2cb3f7217fa5893b5da1d3a38284e8efe7"
+            "sha256": "bd1e1b2fce619d705701c876ecf3924a6ea74e47923ab9beb683e88b477f39cd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -46,6 +46,15 @@
             ],
             "markers": "python_version >= '3.6' and python_version < '4'",
             "version": "==4.9"
+        },
+        "setuptools": {
+            "hashes": [
+                "sha256:80aacbf633704e9c8bfa1d99fa5dd4dc59573efcf9e4042c13d3bcef91ac2ef9",
+                "sha256:f11dd94b7bae3a156a95ec151f24e4637fb4fa19c878e4d191bfb8b2d82728c4"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==72.2.0"
         },
         "telethon": {
             "hashes": [
