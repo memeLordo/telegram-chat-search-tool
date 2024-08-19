@@ -33,7 +33,7 @@ async def search(request: str):
                 dialog,
                 search=request,
                 limit=100,
-            ):
+            ):  # TODO: rewrite for next const as for loop is unused
                 print(dialog.name)
                 break
 
