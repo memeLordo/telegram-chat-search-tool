@@ -4,6 +4,10 @@ from dotenv import dotenv_values, set_key
 from telethon import TelegramClient
 from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 
+symbols = "-" * 50
+loading = f"Loading: [{symbols}]"
+backtrack = "\b" * len(loading)
+
 
 def mkdir(dirname: str):
     if not os.path.exists(dirname):
@@ -46,16 +50,22 @@ def set_env_keys():
 
 
 async def search():
-    global client
+    global client, loading, symbols
     request = input("Введите ключ поиска: ")
-    result = ""
-    async for dialog in client.iter_dialogs():
+    result = f'Результаты по запросу "{request}":'
+    dialogs = await client.get_dialogs()
+
+    delta = len(symbols) / len(dialogs)
+    _delta = 1 / delta
+
+    sys.stdout.write(backtrack + loading)
+    for i, dialog in enumerate(dialogs, len(dialogs) + 1):
         if dialog.is_group or dialog.is_channel:
-            async for user in client.iter_messages(
+            async for _ in client.iter_messages(
                 dialog,
                 search=request,
                 limit=100,
-            ):  # TODO: rewrite for next const as for loop is unused
+            ):
                 result = result + "\n" + dialog.name
                 break
     return result
