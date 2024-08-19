@@ -79,6 +79,8 @@ def start_client(api_id, api_hash):
         print("Данные введены неверно. Повторите попытку.")
         api_id, api_hash = set_env_keys()
         start_client(api_id, api_hash)
+    except KeyboardInterrupt:
+        print("\nВыход из программы.")
 
 
 def main():
