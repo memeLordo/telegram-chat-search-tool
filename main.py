@@ -54,7 +54,6 @@ def start_client(api_id, api_hash):
 def main():
     api_id, api_hash = get_env_keys()
     start_client(api_id, api_hash)
-    print(api_id, api_hash, end="\n")
 
 
 if __name__ == "__main__":
