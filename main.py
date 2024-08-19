@@ -53,6 +53,7 @@ def set_env_keys():
 
 async def search():
     global client, loading, symbols
+    _loading = loading
     request = input("Введите ключ поиска: ")
     result = f'Результаты по запросу "{request}":'
     dialogs = await client.get_dialogs()
@@ -60,7 +61,7 @@ async def search():
     delta = len(symbols) / len(dialogs)
     _delta = 1 / delta
 
-    sys.stdout.write(backtrack + loading)
+    sys.stdout.write(backtrack + _loading)
     for i, dialog in enumerate(dialogs, len(dialogs) + 1):
         if dialog.is_group or dialog.is_channel:
             async for _ in client.iter_messages(
@@ -72,12 +73,12 @@ async def search():
                 break
 
         if i % _delta * delta >= 1 - delta:
-            loading = loading.replace(symbols[0], "=", 1)
+            _loading = _loading.replace(symbols[0], "=", 1)
             sys.stdout.flush()
-            sys.stdout.write(backtrack + loading)
+            sys.stdout.write(backtrack + _loading)
             time.sleep(1 / len(symbols))
     sys.stdout.write(backtrack)
-    print("Complete!" + " " * len(loading), end="\n")
+    print("Complete!" + " " * len(_loading), end="\n")
     print(symbols + "\n" + result + "\n" + symbols, end="\n")
     return result
 
