@@ -68,13 +68,13 @@ def start_client(api_id, api_hash):
         match input("Сохранить результат в файл (y/N): "):
             case "y":
                 save_to_txt(result)
+                print("<End message>")
 
     try:
         global client
         session_dir = mkdir("./sessions")
         client = TelegramClient(f"{session_dir}/client", api_id, api_hash)
         run_()
-        print("<End message>")
     except (ApiIdInvalidError, HashInvalidError):
         print("Данные введены неверно. Повторите попытку.")
         api_id, api_hash = set_env_keys()
