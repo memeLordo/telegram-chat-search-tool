@@ -1,4 +1,6 @@
 import os
+import sys
+import time
 
 from dotenv import dotenv_values, set_key
 from telethon import TelegramClient
@@ -68,6 +70,14 @@ async def search():
             ):
                 result = result + "\n" + dialog.name
                 break
+
+        if i % _delta * delta >= 1 - delta:
+            loading = loading.replace(symbols[0], "=", 1)
+            sys.stdout.flush()
+            sys.stdout.write(backtrack + loading)
+            time.sleep(1 / len(symbols))
+    sys.stdout.write(backtrack)
+    print("Complete!" + " " * len(loading), end="\n")
     return result
 
 
