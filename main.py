@@ -39,11 +39,14 @@ async def search():
 
 
 def start_client(api_id, api_hash):
+    def run_(client):
+        with client:
+            client.loop.run_until_complete(search())
+
     try:
         global client
         client = TelegramClient("./sessions/client", api_id, api_hash)
-        with client:
-            client.loop.run_until_complete(search())
+        run_(client)
         print("<End message>")
     except (ApiIdInvalidError, HashInvalidError):
         print("Данные введены неверно. Повторите попытку.")
