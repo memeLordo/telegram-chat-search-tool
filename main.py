@@ -117,7 +117,8 @@ def start_client(api_id: int, api_hash: str):
             result = client.loop.run_until_complete(search())
         match input("Сохранить результат в файл (y/N): "):
             case "y":
-                save_to_txt(result)
+                mode_stat = f"MODE: {str(mode).upper()}\n"
+                save_to_txt(mode_stat + result)
             case _:
                 pass
 
