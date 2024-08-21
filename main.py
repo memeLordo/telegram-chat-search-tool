@@ -7,6 +7,7 @@ from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 from telethon.sync import TelegramClient
 from telethon.tl.custom import Dialog
 
+# TODO: Make Loading class
 symbols = "-" * 50
 loading = f"Loading: [{symbols}]"
 backtrack = "\b" * len(loading)
@@ -43,6 +44,7 @@ def set_env_keys() -> tuple[int, str]:
         return set_env_keys()
 
 
+# TODO: Make mode class
 def get_mode_from(env_config: dict[str, str | None]):
     try:
         global mode
