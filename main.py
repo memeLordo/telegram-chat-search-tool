@@ -47,6 +47,8 @@ def get_mode_from(env_config: dict[str, str | None]):
     try:
         global mode
         mode = str(env_config["MODE"])
+        if str(mode).lower() not in ("title", "link"):
+            raise KeyError
     except KeyError:
         _, _, mode = set_key(".env.script", "MODE", "link")
     print(f"Установлен режим вывода {repr(mode).upper()}")
