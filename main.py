@@ -5,6 +5,7 @@ import time
 from dotenv import dotenv_values, set_key
 from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 from telethon.sync import TelegramClient
+from telethon.tl.custom import Dialog
 
 symbols = "-" * 50
 loading = f"Loading: [{symbols}]"
@@ -62,6 +63,20 @@ def get_env_keys() -> tuple[int, str]:
         return set_env_keys()
 
 
+def set_message(text: str, dialog: Dialog):
+    global mode
+    match str(mode).lower():
+        case "link":
+            try:
+                if dialog.entity.username is None:
+                    raise AttributeError
+                return text + "\nhttps://t.me/" + dialog.entity.username
+            except AttributeError:
+                return text
+        case _:
+            return text + "\n" + dialog.title
+
+
 async def search() -> str:
     global client, loading, symbols
     _loading = loading
@@ -80,7 +95,7 @@ async def search() -> str:
                 search=request,
                 limit=100,
             ):
-                result = result + "\n" + dialog.name
+                result = set_message(result, dialog)
                 break
 
         if i % _delta * delta >= 1 - delta:
