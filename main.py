@@ -11,7 +11,7 @@ loading = f"Loading: [{symbols}]"
 backtrack = "\b" * len(loading)
 
 
-def mkdir(dirname: str):
+def mkdir(dirname: str) -> str:
     if not os.path.exists(dirname):
         os.makedirs(dirname)
     return dirname
