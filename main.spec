@@ -3,10 +3,10 @@
 
 a = Analysis(
     ['main.py'],
-    pathex=['$VIRTUAL_ENV/lib/python3.10/site-packages'],
+    pathex=[],
     binaries=[],
     datas=[],
-    hiddenimports=['telethon', 'python-dotenv', 'setuptools'],
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -35,4 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['icon.ico'],
 )
