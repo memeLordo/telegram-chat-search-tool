@@ -3,8 +3,8 @@ import sys
 import time
 
 from dotenv import dotenv_values, set_key
-from telethon import TelegramClient
 from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
+from telethon.sync import TelegramClient
 
 symbols = "-" * 50
 loading = f"Loading: [{symbols}]"
