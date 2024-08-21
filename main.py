@@ -91,6 +91,8 @@ def start_client(api_id: int, api_hash: str):
             case "y":
                 save_to_txt(result)
                 print("<End message>")
+            case _:
+                pass
 
     global client
     session_dir = mkdir("./sessions")
