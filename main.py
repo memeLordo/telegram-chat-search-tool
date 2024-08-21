@@ -29,16 +29,6 @@ def save_to_txt(text: str):
     index += 1
 
 
-def get_env_keys():
-    try:
-        env_config = dotenv_values(".env.script")
-        api_id = int(env_config["API_ID"] or 0)
-        api_hash = str(env_config["API_HASH"] or None)
-        return (api_id, api_hash)
-    except KeyError:
-        return set_env_keys()
-
-
 def set_env_keys():
     try:
         api_id = int(input("API_ID: "))
@@ -51,7 +41,17 @@ def set_env_keys():
         return set_env_keys()
 
 
-async def search():
+def get_env_keys() -> tuple[int, str]:
+    try:
+        env_config = dotenv_values(".env.script")
+        api_id = int(env_config["API_ID"] or 0)
+        api_hash = str(env_config["API_HASH"] or None)
+        return (api_id, api_hash)
+    except KeyError:
+        return set_env_keys()
+
+
+async def search() -> str:
     global client, loading, symbols
     _loading = loading
     request = input("Введите ключ поиска: ")
