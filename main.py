@@ -83,7 +83,7 @@ async def search() -> str:
     return result
 
 
-def start_client(api_id, api_hash):
+def start_client(api_id: int, api_hash: str):
     def run_():
         with client:
             result = client.loop.run_until_complete(search())
