@@ -84,7 +84,7 @@ def set_message(text: str, dialog: Dialog):
 async def search() -> str:
     global client, loading, symbols
     _loading = loading
-    request: str = input("Введите ключ поиска: ")
+    request: str = input("Поиск: ")
     result: str = f'Результаты по запросу "{request}":'
     dialogs = await client.get_dialogs()
 
