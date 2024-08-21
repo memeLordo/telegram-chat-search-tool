@@ -103,6 +103,9 @@ def start_client(api_id, api_hash):
         start_client(api_id, api_hash)
     except KeyboardInterrupt:
         print("\nВыход из программы.")
+    except EOFError:
+        print("Превышено время ожидания. Перезапуск программы.")
+        run_()
 
 
 def main():
