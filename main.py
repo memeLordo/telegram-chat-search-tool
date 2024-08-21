@@ -27,6 +27,7 @@ def save_to_txt(text: str):
     with open(filename, "w+") as file:
         file.write(text)
     index += 1
+    print("Файл сохранён.")
 
 
 def set_env_keys() -> tuple[int, str]:
@@ -90,7 +91,6 @@ def start_client(api_id: int, api_hash: str):
         match input("Сохранить результат в файл (y/N): "):
             case "y":
                 save_to_txt(result)
-                print("<End message>")
             case _:
                 pass
 
