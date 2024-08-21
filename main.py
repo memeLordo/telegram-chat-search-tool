@@ -42,9 +42,19 @@ def set_env_keys() -> tuple[int, str]:
         return set_env_keys()
 
 
+def get_mode_from(env_config: dict[str, str | None]):
+    try:
+        global mode
+        mode = str(env_config["MODE"])
+    except KeyError:
+        _, _, mode = set_key(".env.script", "MODE", "link")
+    print(f"Установлен режим вывода {repr(mode).upper()}")
+
+
 def get_env_keys() -> tuple[int, str]:
     try:
         env_config = dotenv_values(".env.script")
+        get_mode_from(env_config)
         api_id = int(env_config["API_ID"] or 0)
         api_hash = str(env_config["API_HASH"] or None)
         return (api_id, api_hash)
