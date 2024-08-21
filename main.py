@@ -97,7 +97,8 @@ def start_client(api_id: int, api_hash: str):
     global client
     session_dir = mkdir("./sessions")
     client = TelegramClient(f"{session_dir}/client", api_id, api_hash)
-    run_()
+    while True:
+        run_()
 
 
 def main():
