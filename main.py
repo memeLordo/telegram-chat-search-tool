@@ -92,27 +92,26 @@ def start_client(api_id, api_hash):
                 save_to_txt(result)
                 print("<End message>")
 
-    try:
-        global client
-        session_dir = mkdir("./sessions")
-        client = TelegramClient(f"{session_dir}/client", api_id, api_hash)
-        run_()
-    except (ApiIdInvalidError, HashInvalidError):
-        print("Данные введены неверно. Повторите попытку.")
-        api_id, api_hash = set_env_keys()
-        start_client(api_id, api_hash)
-    except KeyboardInterrupt:
-        print("\nВыход из программы.")
-    except EOFError:
-        print("Превышено время ожидания. Перезапуск программы.")
-        run_()
+    global client
+    session_dir = mkdir("./sessions")
+    client = TelegramClient(f"{session_dir}/client", api_id, api_hash)
+    run_()
 
 
 def main():
-    global index
-    index = 1
-    api_id, api_hash = get_env_keys()
-    start_client(api_id, api_hash)
+    try:
+        global index
+        index = 1
+        api_id, api_hash = get_env_keys()
+        start_client(api_id, api_hash)
+    except EOFError:
+        print("Превышено время ожидания. Перезапуск программы.")
+        main()
+    except (ApiIdInvalidError, HashInvalidError):
+        print("Данные введены неверно. Повторите попытку.")
+        main()
+    except KeyboardInterrupt:
+        print("\nВыход из программы.")
 
 
 if __name__ == "__main__":
