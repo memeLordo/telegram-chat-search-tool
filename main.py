@@ -65,7 +65,7 @@ async def search() -> str:
     for i, dialog in enumerate(dialogs, len(dialogs) + 1):
         if dialog.is_group or dialog.is_channel:
             async for _ in client.iter_messages(
-                dialog,
+                entity=dialog,
                 search=request,
                 limit=100,
             ):
