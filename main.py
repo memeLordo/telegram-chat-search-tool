@@ -29,7 +29,7 @@ def save_to_txt(text: str):
     index += 1
 
 
-def set_env_keys():
+def set_env_keys() -> tuple[int, str]:
     try:
         api_id = int(input("API_ID: "))
         api_hash = input("API_HASH: ")
@@ -54,8 +54,8 @@ def get_env_keys() -> tuple[int, str]:
 async def search() -> str:
     global client, loading, symbols
     _loading = loading
-    request = input("Введите ключ поиска: ")
-    result = f'Результаты по запросу "{request}":'
+    request: str = input("Введите ключ поиска: ")
+    result: str = f'Результаты по запросу "{request}":'
     dialogs = await client.get_dialogs()
 
     delta = len(symbols) / len(dialogs)
