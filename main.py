@@ -93,6 +93,8 @@ async def search() -> str:
 
     sys.stdout.write(backtrack + _loading)
     for i, dialog in enumerate(dialogs, len(dialogs) + 1):
+        if len(dialogs) > 1000:
+            time.sleep(0.6)
         if dialog.is_group or dialog.is_channel:
             async for _ in client.iter_messages(
                 entity=dialog,
