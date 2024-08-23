@@ -145,6 +145,9 @@ def main():
         main()
     except KeyboardInterrupt:
         print("\nВыход из программы.")
+    except Exception as e:
+        print("Unhandled error!", file=sys.stderr, flush=True)
+        print(f"\n{repr(e)}")
 
 
 if __name__ == "__main__":
