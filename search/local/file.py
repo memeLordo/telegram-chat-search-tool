@@ -1,20 +1,24 @@
 import os
 
 
-def mkdir(dirname: str) -> str:
-    if not os.path.exists(dirname):
-        os.makedirs(dirname)
-    return dirname
+class File:
+    def __new__(cls):
+        cls.index = 1
 
+    @staticmethod
+    def mkdir(dirname: str) -> str:
+        if not os.path.exists(dirname):
+            os.makedirs(dirname)
+        return dirname
 
-def save_to_txt(text: str):
-    global index
-    dir = mkdir("./requests")
-    filename = f"{dir}/request[{index}].txt"
-    while os.path.exists(filename):
-        index += 1
-        filename = f"{dir}/request[{index}].txt"
-    with open(filename, "w+") as file:
-        file.write(text)
-    index += 1
-    print("Файл сохранён.")
+    @classmethod
+    def save_to_txt(cls, text: str):
+        dir = File.mkdir("./requests")
+        filename = f"{dir}/request[{cls.index}].txt"
+        while os.path.exists(filename):
+            cls.index += 1
+            filename = f"{dir}/request[{cls.index}].txt"
+        with open(filename, "w+") as file:
+            file.write(text)
+        cls.index += 1
+        print("Файл сохранён.")
