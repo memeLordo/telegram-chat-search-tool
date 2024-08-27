@@ -12,7 +12,7 @@ class File:
         return dirname
 
     @classmethod
-    def save_to_txt(cls, text: str):
+    def convert_txt(cls, text: str):
         dir = File.mkdir("./requests")
         filename = f"{dir}/request[{cls.index}].txt"
         while os.path.exists(filename):
