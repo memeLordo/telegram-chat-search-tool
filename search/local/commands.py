@@ -2,6 +2,8 @@ import time
 
 from telethon.tl.custom import Dialog
 
+from search.local.loading import Load
+
 
 def set_message(text: str, dialog: Dialog):
     global mode
@@ -18,8 +20,8 @@ def set_message(text: str, dialog: Dialog):
 
 
 async def search() -> str:
-    global client, loading, symbols
-    _loading = loading
+    global client
+    _loading = Load.message
     request: str = input("Поиск: ")
     result: str = f'Результаты по запросу "{request}":'
     dialogs = await client.get_dialogs()
