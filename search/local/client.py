@@ -8,7 +8,7 @@ session_dir = File.mkdir("./sessions")
 client = TelegramClient(f"{session_dir}/client", Env.api_id, Env.api_hash)
 
 
-def start_client():
+def start_search():
     def run_():
         with client:
             result = client.loop.run_until_complete(search())
