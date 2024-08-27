@@ -1,7 +1,14 @@
 from telethon.sync import TelegramClient
 
+from .commands import search
+from .config import Env
+from .file import File
 
-def start_client(api_id: int, api_hash: str):
+session_dir = File.mkdir("./sessions")
+client = TelegramClient(f"{session_dir}/client", Env.api_id, Env.api_hash)
+
+
+def start_client():
     def run_():
         with client:
             result = client.loop.run_until_complete(search())
@@ -12,8 +19,5 @@ def start_client(api_id: int, api_hash: str):
             case _:
                 pass
 
-    global client
-    session_dir = mkdir("./sessions")
-    client = TelegramClient(f"{session_dir}/client", api_id, api_hash)
     while True:
         run_()
