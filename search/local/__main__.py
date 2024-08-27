@@ -4,11 +4,9 @@ from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 
 from .client import start_search
 
+
 def main():
     try:
-        global index
-        index = 1
-        api_id, api_hash = get_env_keys()
         start_search()
     except EOFError:
         print("Превышено время ожидания. Перезапуск программы.")
