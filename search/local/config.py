@@ -5,6 +5,16 @@ class Env:
     __file__ = ".env.config"
 
     @classmethod
+    def __new__(cls):
+        try:
+            env_config = dotenv_values(cls.__file__)
+            cls.get_mode_from(env_config)
+            cls.api_id = int(env_config["API_ID"] or 0)
+            cls.api_hash = str(env_config["API_HASH"] or None)
+        except KeyError:
+            cls.set_keys()
+
+    @classmethod
     def get_mode_from(cls, env_config: dict[str, str | None]):
         try:
             cls.mode = str(env_config["MODE"])
@@ -26,15 +36,6 @@ class Env:
             return cls.set_keys()
 
     @classmethod
-    def get_keys(cls) -> tuple[int, str]:
-        try:
-            env_config = dotenv_values(".env.config")
-            cls.get_mode_from(env_config)
-            api_id = int(env_config["API_ID"] or 0)
-            api_hash = str(env_config["API_HASH"] or None)
-            return (api_id, api_hash)
-        except KeyError:
-            return cls.set_keys()
     def _mode(cls) -> str:
         return f"MODE: {cls.mode.upper()}\n"
 
