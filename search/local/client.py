@@ -14,8 +14,7 @@ def start_search():
             result = client.loop.run_until_complete(search())
         match input("Сохранить результат в файл (y/N): "):
             case "y":
-                mode_stat = f"MODE: {str(mode).upper()}\n"
-                save_to_txt(mode_stat + result)
+                File.convert_txt(Env._mode() + result)
             case _:
                 pass
 
