@@ -2,12 +2,12 @@ import time
 
 from telethon.tl.custom import Dialog
 
+from search.local.config import Env
 from search.local.loading import Load
 
 
 def set_message(text: str, dialog: Dialog):
-    global mode
-    match str(mode).lower():
+    match Env.mode.lower():
         case "link":
             try:
                 if dialog.entity.username is None:
