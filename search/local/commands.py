@@ -23,15 +23,17 @@ def set_message(text: str, dialog: Dialog):
 
 async def search() -> str:
     global client
-    _loading = Load.message
+    loading = Load.message
+    backtrack = Load.backtrack
+    bar = Load.bar
     request: str = input("Поиск: ")
     result: str = f'Результаты по запросу "{request}":'
     dialogs = await client.get_dialogs()
 
-    delta = len(symbols) / len(dialogs)
+    delta = bar.length / len(dialogs)
     _delta = 1 / delta
 
-    sys.stdout.write(backtrack + _loading)
+    sys.stdout.write(backtrack + loading)
     for i, dialog in enumerate(dialogs, len(dialogs) + 1):
         if len(dialogs) > 1000:
             time.sleep(0.6)
@@ -45,11 +47,11 @@ async def search() -> str:
                 break
 
         if i % _delta * delta >= 1 - delta:
-            _loading = _loading.replace(symbols[0], "=", 1)
+            loading = loading.replace(bar.symbol, "=", 1)
             sys.stdout.flush()
-            sys.stdout.write(backtrack + _loading)
-            time.sleep(1 / len(symbols))
     sys.stdout.write(backtrack)
     print("Complete!" + " " * len(_loading), end="\n")
     print(symbols + "\n" + result + "\n" + symbols, end="\n")
+            sys.stdout.write(backtrack + loading)
+            time.sleep(1 / bar.length)
     return result
