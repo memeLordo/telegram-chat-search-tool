@@ -1,6 +1,3 @@
-# TODO: Make Loading class
-
-
 class Load:
     class Bar:
         symbol = "-"
@@ -16,6 +13,3 @@ class Load:
     bar = Bar()
     message = f"Loading: [{bar}]"
     backtrack = "\b" * len(message)
-
-
-print(Load.bar)
