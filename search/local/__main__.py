@@ -2,7 +2,6 @@ import os
 import sys
 import time
 
-from dotenv import dotenv_values, set_key
 from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 from telethon.tl.custom import Dialog
 
@@ -29,41 +28,6 @@ def save_to_txt(text: str):
         file.write(text)
     index += 1
     print("Файл сохранён.")
-
-
-def set_env_keys() -> tuple[int, str]:
-    try:
-        api_id = int(input("API_ID: "))
-        api_hash = input("API_HASH: ")
-        set_key(".env.config", "API_ID", str(api_id))
-        set_key(".env.config", "API_HASH", api_hash)
-        return (api_id, api_hash)
-    except ValueError:
-        print("IP должно быть числом!")
-        return set_env_keys()
-
-
-# TODO: Make mode class
-def get_mode_from(env_config: dict[str, str | None]):
-    try:
-        global mode
-        mode = str(env_config["MODE"])
-        if str(mode).lower() not in ("title", "link"):
-            raise KeyError
-    except KeyError:
-        _, _, mode = set_key(".env.config", "MODE", "link")
-    print(f"Установлен режим вывода {repr(mode).upper()}")
-
-
-def get_env_keys() -> tuple[int, str]:
-    try:
-        env_config = dotenv_values(".env.config")
-        get_mode_from(env_config)
-        api_id = int(env_config["API_ID"] or 0)
-        api_hash = str(env_config["API_HASH"] or None)
-        return (api_id, api_hash)
-    except KeyError:
-        return set_env_keys()
 
 
 def set_message(text: str, dialog: Dialog):
