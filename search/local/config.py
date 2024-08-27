@@ -35,5 +35,7 @@ class Env:
             return (api_id, api_hash)
         except KeyError:
             return cls.set_keys()
+    def _mode(cls) -> str:
+        return f"MODE: {cls.mode.upper()}\n"
 
         # print(f"Установлен режим вывода {repr(mode).upper()}")
