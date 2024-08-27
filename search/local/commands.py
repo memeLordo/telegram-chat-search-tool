@@ -49,9 +49,8 @@ async def search() -> str:
         if i % _delta * delta >= 1 - delta:
             loading = loading.replace(bar.symbol, "=", 1)
             sys.stdout.flush()
-    sys.stdout.write(backtrack)
-    print("Complete!" + " " * len(_loading), end="\n")
-    print(symbols + "\n" + result + "\n" + symbols, end="\n")
             sys.stdout.write(backtrack + loading)
             time.sleep(1 / bar.length)
+    sys.stdout.write(backtrack + "Complete!\n")
+    print(f"{bar}\n{result}\n{bar}\n")
     return result
