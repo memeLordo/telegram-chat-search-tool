@@ -1,9 +1,11 @@
+import sys
 import time
 
 from telethon.tl.custom import Dialog
 
-from search.local.config import Env
-from search.local.loading import Load
+from .client import client
+from .config import Env
+from .loading import Load
 
 
 def set_message(text: str, dialog: Dialog):
