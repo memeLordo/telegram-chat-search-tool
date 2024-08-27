@@ -1,8 +1,8 @@
 from dotenv import dotenv_values, set_key
 
 
-class ENV:
     # TODO: Make mode class
+class Env:
     @classmethod
     def get_mode_from(cls, env_config: dict[str, str | None]):
         try:
