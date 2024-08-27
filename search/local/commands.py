@@ -51,6 +51,6 @@ async def search() -> str:
             sys.stdout.flush()
             sys.stdout.write(backtrack + loading)
             time.sleep(1 / bar.length)
-    sys.stdout.write(backtrack + "Complete!\n")
-    print(f"{bar}\n{result}\n{bar}\n")
+    sys.stdout.write(backtrack + "Complete!" + len(backtrack) * " ")
+    print(f"\n{bar}\n{result}\n{bar}\n")
     return result
