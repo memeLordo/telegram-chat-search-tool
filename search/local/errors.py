@@ -1,4 +1,4 @@
-def return_error_handler(errors=(Exception,), err_message=" "):
+def error_handler(errors=(Exception,), err_message=" "):
     def wrapper(func):
         def wrapped(*args, **kwargs):
             try:
