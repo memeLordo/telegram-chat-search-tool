@@ -2,11 +2,6 @@ import sys
 
 from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 
-# TODO: Make Loading class
-symbols = "-" * 50
-loading = f"Loading: [{symbols}]"
-backtrack = "\b" * len(loading)
-
 
 def main():
     try:
