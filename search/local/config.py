@@ -38,4 +38,6 @@ class Env:
     def _mode(cls) -> str:
         return f"MODE: {cls.mode.upper()}\n"
 
-        # print(f"Установлен режим вывода {repr(mode).upper()}")
+    @classmethod
+    def _output(cls) -> str:
+        return f"Установлен режим вывода {cls.mode.upper()}"
