@@ -3,7 +3,7 @@ class Load:
         symbol = "-"
         length = 50
 
-        def __init__(self, symbol=symbol, length=length) -> None:
+        def __init__(self, symbol=symbol, length=length):
             self.symbol = symbol
             self.length = length
 
