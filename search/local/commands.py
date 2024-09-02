@@ -21,6 +21,7 @@ def set_message(text: str, dialog: Dialog) -> str:
             return text + "\n" + dialog.title
 
 
+# TODO: add eof_handler
 async def search() -> str:
     bar = Load.bar
     request: str = input("Поиск: ")
