@@ -4,21 +4,21 @@ import time
 from telethon.tl.custom import Dialog
 
 from .client import client
-from .config import Env
+from .config import Env, Mode
 from .file import File
 from .loading import Load
 
 
 def set_message(text: str, dialog: Dialog):
-    match Env.mode.lower():
-        case "link":
+    match Env.mode:
+        case Mode.LINK:
             try:
                 if dialog.entity.username is None:
                     raise AttributeError
                 return text + "\nhttps://t.me/" + dialog.entity.username
             except AttributeError:
                 return text
-        case _:
+        case Mode.TITLE:
             return text + "\n" + dialog.title
 
 
