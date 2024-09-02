@@ -1,16 +1,16 @@
-from enum import Enum
+from enum import StrEnum, auto
 
 from dotenv import dotenv_values, set_key
 
 
-class Mode(Enum):
-    LINK = "link"
-    TIITLE = "title"
+class Mode(StrEnum):
+    LINK = auto()
+    TITLE = auto()
 
     @classmethod
-    def find(cls, param):
+    def check(cls, param: str):
         for e in Mode:
-            if e.value == param:
+            if e == param:
                 return e
         raise KeyError
 
@@ -31,10 +31,10 @@ class Env:
     @classmethod
     def get_mode_from(cls, env_config: dict[str, str | None]):
         try:
-            cls.mode = Mode.find(str(env_config["MODE"]))
+            cls.mode = Mode.check(str(env_config["MODE"]))
         except KeyError:
             cls.mode = Mode.LINK
-            set_key(cls.__file__, "MODE", cls.mode.value)
+            set_key(cls.__file__, "MODE", cls.mode)
 
     @classmethod
     def set_keys(cls):
@@ -49,7 +49,7 @@ class Env:
 
     @classmethod
     def _mode(cls) -> str:
-        return f"MODE: {cls.mode.value.upper()}\n"
+        return f"MODE: {cls.mode.upper()}\n"
 
     @classmethod
     def _output(cls) -> str:
