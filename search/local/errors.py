@@ -35,3 +35,4 @@ id_error_handler = error_handler(
 )
 eof_handler = error_handler(EOFError, "Превышено время ожидания. Перезапуск программы.")
 keyinterrupt_handler = error_handler(KeyboardInterrupt, "Выход из программы.")
+unknown_handler = error_handler()
