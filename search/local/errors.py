@@ -2,6 +2,7 @@ def error_handler(
     errors=(Exception,),
     err_message="Unhandled error!",
     callable=False,
+    custom_func=lambda: None,
 ):
     def wrapper(func):
         def wrapped(*args, **kwargs):
@@ -9,6 +10,7 @@ def error_handler(
                 return func(*args, **kwargs)
             except errors:
                 print(err_message)
+                custom_func()
             finally:
                 if callable:
                     return func(*args, **kwargs)
