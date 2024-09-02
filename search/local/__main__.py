@@ -2,7 +2,7 @@ import sys
 
 from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
 
-from .client import start_search
+from .commands import start_search
 
 
 def main():

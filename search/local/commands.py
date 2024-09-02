@@ -5,6 +5,7 @@ from telethon.tl.custom import Dialog
 
 from .client import client
 from .config import Env
+from .file import File
 from .loading import Load
 
 
@@ -53,3 +54,17 @@ async def search() -> str:
     sys.stdout.write(backtrack + "Complete!" + len(backtrack) * " ")
     print(f"\n{bar}\n{result}\n{bar}\n")
     return result
+
+
+def start_search():
+    def run_():
+        with client:
+            result = client.loop.run_until_complete(search())
+        match input("Сохранить результат в файл (y/N): "):
+            case "y":
+                File.convert_txt(Env._mode() + result)
+            case _:
+                pass
+
+    while True:
+        run_()
