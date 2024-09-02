@@ -18,7 +18,6 @@ def error_handler(
                 if errors == (Exception,):
                     print(repr(e))
                 custom_func()
-            finally:
                 if callable:
                     return func(*args, **kwargs)
 
