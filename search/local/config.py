@@ -31,11 +31,10 @@ class Env:
     @classmethod
     def get_mode_from(cls, env_config: dict[str, str | None]):
         try:
-            cls.mode = str(env_config["MODE"])
-            if str(cls.mode).lower() not in ("title", "link"):
-                raise KeyError
+            cls.mode = Mode.find(str(env_config["MODE"]))
         except KeyError:
-            _, _, cls.mode = set_key(cls.__file__, "MODE", "link")
+            cls.mode = Mode.LINK
+            set_key(cls.__file__, "MODE", cls.mode.value)
 
     @classmethod
     def set_keys(cls):
@@ -50,8 +49,8 @@ class Env:
 
     @classmethod
     def _mode(cls) -> str:
-        return f"MODE: {cls.mode.upper()}\n"
+        return f"MODE: {cls.mode.value.upper()}\n"
 
     @classmethod
     def _output(cls) -> str:
-        return f"Установлен режим вывода {cls.mode.upper()}"
+        return f"Установлен режим вывода {cls.mode.value.upper()}"
