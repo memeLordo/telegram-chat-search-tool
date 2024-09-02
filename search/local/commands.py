@@ -54,7 +54,7 @@ def start_search():
             result = client.loop.run_until_complete(search())
         match input("Сохранить результат в файл (y/N): "):
             case "y":
-                File.convert_txt(Env._mode() + result)
+                File().convert_txt(Env._mode() + result)
             case _:
                 pass
 
