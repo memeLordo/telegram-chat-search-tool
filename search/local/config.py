@@ -5,7 +5,7 @@ class Env:
     __file__ = ".env.config"
 
     @classmethod
-    def __new__(cls):
+    def create(cls):
         try:
             env_config = dotenv_values(cls.__file__)
             cls.get_mode_from(env_config)
