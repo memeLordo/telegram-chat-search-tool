@@ -4,7 +4,7 @@ from .config import Env
 
 
 def error_handler(
-    errors=(Exception,),
+    errors=(BaseException,),
     err_message="Unhandled error!",
     callable=False,
     custom_func=lambda: None,
@@ -15,7 +15,7 @@ def error_handler(
                 return func(*args, **kwargs)
             except errors as e:
                 print("\n" + err_message)
-                if errors == (Exception,):
+                if errors == (BaseException,):
                     print(repr(e))
                 custom_func()
                 if callable:
