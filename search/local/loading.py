@@ -1,3 +1,6 @@
+import sys
+
+
 class Load:
     class Bar:
         symbol = "-"
@@ -13,3 +16,9 @@ class Load:
     bar = Bar()
     message = f"Loading: [{bar}]"
     backtrack = "\b" * len(message)
+
+    @classmethod
+    def create(cls):
+        sys.stdout.write(cls.backtrack + cls.message)
+        cls.buffer = cls.message
+
