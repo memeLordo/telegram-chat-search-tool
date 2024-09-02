@@ -2,8 +2,8 @@ import os
 
 
 class File:
-    def __new__(cls):
-        cls.index = 1
+    def __init__(self):
+        self.index = 1
 
     @staticmethod
     def mkdir(dirname: str) -> str:
@@ -11,14 +11,13 @@ class File:
             os.makedirs(dirname)
         return dirname
 
-    @classmethod
-    def convert_txt(cls, text: str):
+    def convert_txt(self, text: str):
         dir = File.mkdir("./requests")
-        filename = f"{dir}/request[{cls.index}].txt"
+        filename = f"{dir}/request[{self.index}].txt"
         while os.path.exists(filename):
-            cls.index += 1
-            filename = f"{dir}/request[{cls.index}].txt"
+            self.index += 1
+            filename = f"{dir}/request[{self.index}].txt"
         with open(filename, "w+") as file:
             file.write(text)
-        cls.index += 1
+        self.index += 1
         print("Файл сохранён.")
