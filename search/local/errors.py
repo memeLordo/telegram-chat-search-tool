@@ -29,7 +29,7 @@ def error_handler(
 
 id_error_handler = error_handler(
     errors=(ApiIdInvalidError, HashInvalidError),
-    err_message="Данные введены неверно.",
+    err_message="Данные ключей API введены неверно.",
     callable=True,
     custom_func=Env.set_keys,
 )
