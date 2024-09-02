@@ -7,6 +7,13 @@ class Mode(Enum):
     LINK = "link"
     TIITLE = "title"
 
+    @classmethod
+    def find(cls, param):
+        for e in Mode:
+            if e.value == param:
+                return e
+        raise KeyError
+
 
 class Env:
     __file__ = ".env.config"
