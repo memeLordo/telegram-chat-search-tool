@@ -1,4 +1,5 @@
 import sys
+import time
 
 
 class Load:
@@ -21,4 +22,11 @@ class Load:
     def create(cls):
         sys.stdout.write(cls.backtrack + cls.message)
         cls.buffer = cls.message
+
+    @classmethod
+    def update(cls):
+        cls.buffer = cls.buffer.replace(cls.bar.symbol, "=", 1)
+        sys.stdout.flush()
+        sys.stdout.write(cls.backtrack + cls.buffer)
+        time.sleep(1 / cls.bar.length)
 
