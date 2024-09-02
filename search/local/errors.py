@@ -32,6 +32,8 @@ id_error_handler = error_handler(
     callable=True,
     custom_func=Env.set_keys,
 )
-eof_handler = error_handler(EOFError, "Превышено время ожидания. Перезапуск программы.")
+eof_handler = error_handler(
+    EOFError, "Превышено время ожидания. Перезапуск программы.", True
+)
 keyinterrupt_handler = error_handler(KeyboardInterrupt, "Выход из программы.")
 unknown_handler = error_handler()
