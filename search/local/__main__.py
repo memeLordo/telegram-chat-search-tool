@@ -1,24 +1,14 @@
-import sys
-
-from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
-
 from .commands import start_search
+from .errors import (eof_handler, id_error_handler, keyinterrupt_handler,
+                     unknown_handler)
 
 
+@unknown_handler
+@keyinterrupt_handler
+@eof_handler
+@id_error_handler
 def main():
-    try:
-        start_search()
-    except EOFError:
-        print("Превышено время ожидания. Перезапуск программы.")
-        main()
-    except (ApiIdInvalidError, HashInvalidError):
-        print("Данные введены неверно. Повторите попытку.")
-        main()
-    except KeyboardInterrupt:
-        print("\nВыход из программы.")
-    except Exception as e:
-        print("Unhandled error!", file=sys.stderr, flush=True)
-        print(f"\n{repr(e)}")
+    start_search()
 
 
 if __name__ == "__main__":
