@@ -1,4 +1,3 @@
-import sys
 import time
 
 from telethon.tl.custom import Dialog
@@ -23,8 +22,6 @@ def set_message(text: str, dialog: Dialog) -> str:
 
 
 async def search() -> str:
-    loading = Load.message
-    backtrack = Load.backtrack
     bar = Load.bar
     request: str = input("Поиск: ")
     result: str = f'Результаты по запросу "{request}":'
@@ -33,7 +30,7 @@ async def search() -> str:
     delta = bar.length / len(dialogs)
     _delta = 1 / delta
 
-    sys.stdout.write(backtrack + loading)
+    Load.create()
     for i, dialog in enumerate(dialogs, len(dialogs) + 1):
         if len(dialogs) > 1000:
             time.sleep(0.6)
@@ -47,11 +44,8 @@ async def search() -> str:
                 break
 
         if i % _delta * delta >= 1 - delta:
-            loading = loading.replace(bar.symbol, "=", 1)
-            sys.stdout.flush()
-            sys.stdout.write(backtrack + loading)
-            time.sleep(1 / bar.length)
-    sys.stdout.write(backtrack + "Complete!" + len(backtrack) * " ")
+            Load.update()
+    Load.complete()
     print(f"\n{bar}\n{result}\n{bar}\n")
     return result
 
