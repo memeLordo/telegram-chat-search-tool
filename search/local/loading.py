@@ -30,3 +30,6 @@ class Load:
         sys.stdout.write(cls.backtrack + cls.buffer)
         time.sleep(1 / cls.bar.length)
 
+    @classmethod
+    def complete(cls):
+        sys.stdout.write(cls.backtrack + "Complete!" + len(cls.backtrack) * " ")
