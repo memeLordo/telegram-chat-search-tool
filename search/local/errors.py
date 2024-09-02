@@ -8,8 +8,10 @@ def error_handler(
         def wrapped(*args, **kwargs):
             try:
                 return func(*args, **kwargs)
-            except errors:
-                print(err_message)
+            except errors as e:
+                print("\n" + err_message)
+                if errors == (Exception,):
+                    print(repr(e))
                 custom_func()
             finally:
                 if callable:
