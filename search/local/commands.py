@@ -22,7 +22,6 @@ def set_message(text: str, dialog: Dialog):
 
 
 async def search() -> str:
-    global client
     loading = Load.message
     backtrack = Load.backtrack
     bar = Load.bar
