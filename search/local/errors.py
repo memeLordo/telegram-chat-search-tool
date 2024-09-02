@@ -1,4 +1,8 @@
-def error_handler(errors=(Exception,), err_message="Unhandled error!", callable=True):
+def error_handler(
+    errors=(Exception,),
+    err_message="Unhandled error!",
+    callable=True,
+):
     def wrapper(func):
         def wrapped(*args, **kwargs):
             try:
