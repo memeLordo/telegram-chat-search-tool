@@ -1,3 +1,8 @@
+from telethon.errors.rpcerrorlist import ApiIdInvalidError, HashInvalidError
+
+from .config import Env
+
+
 def error_handler(
     errors=(Exception,),
     err_message="Unhandled error!",
@@ -20,3 +25,11 @@ def error_handler(
         return wrapped
 
     return wrapper
+
+
+id_error_handler = error_handler(
+    errors=(ApiIdInvalidError, HashInvalidError),
+    err_message="Данные введены неверно.",
+    callable=True,
+    custom_func=Env.set_keys,
+)
