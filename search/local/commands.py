@@ -9,7 +9,7 @@ from .file import File
 from .loading import Load
 
 
-def set_message(text: str, dialog: Dialog):
+def set_message(text: str, dialog: Dialog) -> str:
     match Env.mode:
         case Mode.LINK:
             try:
