@@ -1,4 +1,11 @@
+from enum import Enum
+
 from dotenv import dotenv_values, set_key
+
+
+class Mode(Enum):
+    LINK = "link"
+    TIITLE = "title"
 
 
 class Env:
