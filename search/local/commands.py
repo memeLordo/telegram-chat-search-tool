@@ -36,9 +36,7 @@ async def search() -> str:
             time.sleep(0.6)
         if dialog.is_group or dialog.is_channel:
             async for _ in client.iter_messages(
-                entity=dialog,
-                search=request,
-                limit=100,
+                entity=dialog, search=request, limit=100
             ):
                 result = set_message(result, dialog)
                 break
